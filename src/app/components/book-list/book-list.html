@@ -1,0 +1,24 @@
+<div class="app-block book-list">
+  <h2>Book List</h2>
+  @if (booksList.length === 0) {
+  <p>No books available</p>
+  } @else {
+  <ul>
+    @for (book of booksList; track book.id; let i = $index) {
+    <li>
+      <div class="book-info">
+        {{ i + 1 }}. {{ book.title }} by <strong>{{ book.author }}</strong>
+      </div>
+      <mat-icon
+        (click)="toggleFavorite(book.id)"
+        class="material-icons star-icon"
+        [class.is-favorite]="book.isFavorite"
+      >
+        {{ book.isFavorite ? 'bookmark_added' : 'bookmark_outline' }}
+      </mat-icon>
+      <button class="book-actions" (click)="deleteBook(book.id)">Delete</button>
+    </li>
+    }
+  </ul>
+  }
+</div>

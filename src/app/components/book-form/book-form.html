@@ -1,0 +1,11 @@
+<div class="app-block book-form">
+  <h2>Add New Book</h2>
+  <form [formGroup]="applyForm" (submit)="handleSubmit()">
+    <label for="title">Title: </label>
+    <input id="title" type="text" formControlName="title" />
+    <label for="author">Author: </label>
+    <input id="author" type="text" formControlName="author" />
+    <button type="submit">Add Book</button>
+    <button type="button" (click)="handleAddRandomBook()">Add Random</button>
+  </form>
+</div>
