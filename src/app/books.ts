@@ -10,9 +10,17 @@ type BookInput = { title: string; author: string };
 })
 export class BooksService {
   private books: BookInfo[] = [];
+  private filterTitle: string = '';
+
+  setFilter(title: string) {
+    this.filterTitle = title.toLowerCase();
+  }
 
   getBooks(): BookInfo[] {
-    return [...this.books];
+    const list = [...this.books];
+    if (!this.filterTitle) return list;
+
+    return list.filter((book) => book.title.toLowerCase().includes(this.filterTitle));
   }
 
   addBook(book: BookInput) {
@@ -32,6 +40,10 @@ export class BooksService {
     this.books = this.books.map((book) =>
       book.id === id ? { ...book, isFavorite: !book.isFavorite } : book
     );
+  }
+
+  getFavoriteBooks(): BookInfo[] {
+    return this.books.filter((book) => book.isFavorite);
   }
 
   private createBook(book: BookInput) {

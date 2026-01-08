@@ -13,6 +13,9 @@ export class BookList {
 
   get booksList() {
     return this.booksService.getBooks();
+
+    //  const filterTitle = this.booksService.filterTitle;
+    // return this.booksService.filteredBooksByTitle(filterTitle);
   }
 
   deleteBook(id: string) {
