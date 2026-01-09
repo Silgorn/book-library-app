@@ -16,6 +16,16 @@
         (input)="handleAuthorFilterChange()"
       />
     </div>
+    <div class="filter-group">
+      <label>
+        <input
+          type="checkbox"
+          [formControl]="onlyFavoritesFilterControl"
+          (change)="handleOnlyFavoritesChange()"
+        />
+        Only favorites
+      </label>
+    </div>
     <button type="button" (click)="handleResetFilters()">Reset filters</button>
   </div>
 </div>

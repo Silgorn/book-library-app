@@ -12,6 +12,7 @@ export class BooksService {
   private books: BookInfo[] = [];
   private filterTitle: string = '';
   private filterAuthor: string = '';
+  private onlyFavorites: boolean = false;
 
   setTitleFilter(title: string) {
     this.filterTitle = title.toLowerCase();
@@ -21,9 +22,14 @@ export class BooksService {
     this.filterAuthor = author.toLowerCase();
   }
 
+  setOnlyFavoritesFilter(value: boolean) {
+    this.onlyFavorites = value;
+  }
+
   resetFilter() {
     this.filterTitle = '';
     this.filterAuthor = '';
+    this.onlyFavorites = false;
   }
 
   getBooks(): BookInfo[] {
@@ -32,7 +38,9 @@ export class BooksService {
 
       const matchesAuthor = book.author.toLowerCase().includes(this.filterAuthor);
 
-      return matchesTitle && matchesAuthor;
+      const matchesFavorites = this.onlyFavorites ? book.isFavorite : true;
+
+      return matchesTitle && matchesAuthor && matchesFavorites;
     });
   }
 
@@ -53,10 +61,6 @@ export class BooksService {
     this.books = this.books.map((book) =>
       book.id === id ? { ...book, isFavorite: !book.isFavorite } : book
     );
-  }
-
-  getFavoriteBooks(): BookInfo[] {
-    return this.books.filter((book) => book.isFavorite);
   }
 
   private createBook(book: BookInput) {

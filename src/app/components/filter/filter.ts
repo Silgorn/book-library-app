@@ -13,6 +13,7 @@ export class Filter {
 
   readonly titleFilterControl = new FormControl('', { nonNullable: true });
   readonly authorFilterControl = new FormControl('', { nonNullable: true });
+  readonly onlyFavoritesFilterControl = new FormControl(false, { nonNullable: true });
 
   handleTitleFilterChange(): void {
     this.booksService.setTitleFilter(this.titleFilterControl.value || '');
@@ -22,9 +23,14 @@ export class Filter {
     this.booksService.setAuthorFilter(this.authorFilterControl.value || '');
   }
 
+  handleOnlyFavoritesChange(): void {
+    this.booksService.setOnlyFavoritesFilter(this.onlyFavoritesFilterControl.value);
+  }
+
   handleResetFilters(): void {
     this.booksService.resetFilter();
     this.titleFilterControl.reset('');
     this.authorFilterControl.reset('');
+    this.onlyFavoritesFilterControl.reset(false);
   }
 }
