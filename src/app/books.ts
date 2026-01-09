@@ -16,6 +16,10 @@ export class BooksService {
     this.filterTitle = title.toLowerCase();
   }
 
+  resetFilter() {
+    this.filterTitle = '';
+  }
+
   getBooks(): BookInfo[] {
     const list = [...this.books];
     if (!this.filterTitle) return list;

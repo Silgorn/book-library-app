@@ -1,9 +1,13 @@
 <div class="app-block filter">
-  <div class="filter-group">
-    <input
-      type="text"
-      placeholder="Filter by title..."
-      (input)="handleTitleFilterChange($event.target.value)"
-    />
+  <div class="filter-row">
+    <div class="filter-group">
+      <input
+        [formControl]="searchControl"
+        type="text"
+        placeholder="Filter by title..."
+        (input)="handleTitleFilterChange()"
+      />
+    </div>
+    <button type="button" (click)="handleResetFilters()">Reset filters</button>
   </div>
 </div>
