@@ -11,20 +11,29 @@ type BookInput = { title: string; author: string };
 export class BooksService {
   private books: BookInfo[] = [];
   private filterTitle: string = '';
+  private filterAuthor: string = '';
 
-  setFilter(title: string) {
+  setTitleFilter(title: string) {
     this.filterTitle = title.toLowerCase();
+  }
+
+  setAuthorFilter(author: string) {
+    this.filterAuthor = author.toLowerCase();
   }
 
   resetFilter() {
     this.filterTitle = '';
+    this.filterAuthor = '';
   }
 
   getBooks(): BookInfo[] {
-    const list = [...this.books];
-    if (!this.filterTitle) return list;
+    return this.books.filter((book) => {
+      const matchesTitle = book.title.toLowerCase().includes(this.filterTitle);
 
-    return list.filter((book) => book.title.toLowerCase().includes(this.filterTitle));
+      const matchesAuthor = book.author.toLowerCase().includes(this.filterAuthor);
+
+      return matchesTitle && matchesAuthor;
+    });
   }
 
   addBook(book: BookInput) {

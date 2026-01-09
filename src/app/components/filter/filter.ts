@@ -9,15 +9,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './filter.scss',
 })
 export class Filter {
-  searchControl = new FormControl('');
-  booksService: BooksService = inject(BooksService);
+  private readonly booksService: BooksService = inject(BooksService);
 
-  handleTitleFilterChange() {
-    this.booksService.setFilter(this.searchControl.value || '');
+  readonly titleFilterControl = new FormControl('', { nonNullable: true });
+  readonly authorFilterControl = new FormControl('', { nonNullable: true });
+
+  handleTitleFilterChange(): void {
+    this.booksService.setTitleFilter(this.titleFilterControl.value || '');
+  }
+
+  handleAuthorFilterChange(): void {
+    this.booksService.setAuthorFilter(this.authorFilterControl.value || '');
   }
 
   handleResetFilters(): void {
     this.booksService.resetFilter();
-    this.searchControl.reset('');
+    this.titleFilterControl.reset('');
+    this.authorFilterControl.reset('');
   }
 }

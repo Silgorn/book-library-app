@@ -2,10 +2,18 @@
   <div class="filter-row">
     <div class="filter-group">
       <input
-        [formControl]="searchControl"
+        [formControl]="titleFilterControl"
         type="text"
         placeholder="Filter by title..."
         (input)="handleTitleFilterChange()"
+      />
+    </div>
+    <div class="filter-group">
+      <input
+        [formControl]="authorFilterControl"
+        type="text"
+        placeholder="Filter by author..."
+        (input)="handleAuthorFilterChange()"
       />
     </div>
     <button type="button" (click)="handleResetFilters()">Reset filters</button>

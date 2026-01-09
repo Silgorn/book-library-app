@@ -9,13 +9,10 @@ import { BooksService } from '../../books';
   styleUrl: './book-list.scss',
 })
 export class BookList {
-  booksService: BooksService = inject(BooksService);
+  private readonly booksService: BooksService = inject(BooksService);
 
   get booksList() {
     return this.booksService.getBooks();
-
-    //  const filterTitle = this.booksService.filterTitle;
-    // return this.booksService.filteredBooksByTitle(filterTitle);
   }
 
   deleteBook(id: string) {
