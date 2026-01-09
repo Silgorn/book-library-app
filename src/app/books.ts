@@ -63,6 +63,21 @@ export class BooksService {
     );
   }
 
+  highlightMatch(text: string, filter: string): string {
+    if (!filter) return text;
+
+    const regex = new RegExp(`(${filter})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  get titleFilter(): string {
+    return this.filterTitle;
+  }
+
+  get authorFilter(): string {
+    return this.filterAuthor;
+  }
+
   private createBook(book: BookInput) {
     return { ...book, id: uuidv4(), isFavorite: false };
   }
